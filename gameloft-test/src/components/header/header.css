@@ -1,0 +1,13 @@
+.header {
+    background-color: #002248;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    color: white;
+}
+
+.change-my-mind-btn {
+    display: flex;
+    align-items: center;
+}
