@@ -7,6 +7,10 @@
     color: white;
 }
 
+.slogan {
+    margin-left: 20px;
+}
+
 .change-my-mind-btn {
     display: flex;
     align-items: center;

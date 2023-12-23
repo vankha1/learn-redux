@@ -7,7 +7,7 @@ function Header() {
         <header className='header'>
             <div className='logo'>
                 GAMELOFT
-                <span>FAMILIES USING TECHNOLOGY SURVEY</span>
+                <span className='slogan'>FAMILIES USING TECHNOLOGY SURVEY</span>
             </div>
             <div  className='change-my-mind-btn'>
                 <a> I HAVE CHANGED MY MIND</a>
