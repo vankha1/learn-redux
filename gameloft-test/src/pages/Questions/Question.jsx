@@ -7,36 +7,44 @@ import Question1 from "./Question1/Question1";
 import Question2 from "./Question2/Question2";
 import Question3 from "./Question3/Question3";
 
+const limitQuestionPerPart = 2;
+
 function Question() {
   const { id } = useParams();
 
   const components = [
     {
       component: Question1,
-      title: "What is your role within your family?"
-    }, 
+      title: "What is your role within your family?",
+    },
     {
       component: Question2,
-      title: "What language is spoken in your household?"
+      title: "What language is spoken in your household?",
     },
     {
       component: Question3,
-      title: "Please tell us which touchscreen game, app or story you use most often with your child and why"
-    }
-  ]
+      title:
+        "Please tell us which touchscreen game, app or story you use most often with your child and why",
+    },
+  ];
 
   const QuestionComponent = components[+id - 1].component;
 
   return (
-    <div style={{ textAlign: "center", maxWidth: "35%", margin: "20px auto" }}>
+    <>
       {/* Question header */}
       <div className="question-header">
         {id === "1" ? (
-          ""
+          <div></div>
         ) : (
           <Link
             to={`/questions/${+id - 1}`}
-            style={{ display: "flex", alignItems: "center", cursor: "pointer", textDecoration: "none" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              textDecoration: "none",
+            }}
           >
             <ArrowBackIosNewIcon fontSize="10px" />
             <span>Back</span>
@@ -50,33 +58,42 @@ function Question() {
           }}
         >
           <span>
-            <strong>[Part 1]</strong> <strong>01/</strong>
-            <span>20</span>{" "}
+            <strong>[Part {Math.ceil(+id / limitQuestionPerPart)}]</strong>{" "}
+            <strong>{+id < 10 ? `0${+id}` : id}/</strong>
+            <span>
+              {components.length < 10
+                ? `0${+components.length}`
+                : components.length}
+            </span>{" "}
           </span>
         </div>
       </div>
-        
-      {/* Question Content */}
-      <h2 >{components[+id - 1].title}</h2>
-      <QuestionComponent />
 
-      <Button
-        style={{
-          backgroundColor: "#002248",
-          color: "white",
-          textTransform: "none",
-          paddingLeft: "60px",
-          paddingRight: "60px",
-          margin: "30px 0",
-        }}
-        LinkComponent={Link}
-        to={+id === 3 ? "/form-submit" :`/questions/${+id + 1}`}
-        size="medium"
-        variant="outlined"
+      <div
+        style={{ textAlign: "center", maxWidth: "35%", margin: "20px auto" }}
       >
-        Continue
-      </Button>
-    </div>
+        {/* Question Content */}
+        <h2>{components[+id - 1].title}</h2>
+        <QuestionComponent />
+
+        <Button
+          style={{
+            backgroundColor: "#002248",
+            color: "white",
+            textTransform: "none",
+            paddingLeft: "60px",
+            paddingRight: "60px",
+            margin: "30px 0",
+          }}
+          LinkComponent={Link}
+          to={+id === 3 ? "/form-submit" : `/questions/${+id + 1}`}
+          size="medium"
+          variant="outlined"
+        >
+          Continue
+        </Button>
+      </div>
+    </>
   );
 }
 

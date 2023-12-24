@@ -1,6 +1,7 @@
 .question-header {
+    margin-top: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-bottom: 60px;
 }
