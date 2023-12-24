@@ -5,6 +5,7 @@ import { Routes, Route, Link, useParams } from "react-router-dom";
 import "./question.css";
 import Question1 from "./Question1/Question1";
 import Question2 from "./Question2/Question2";
+import Question3 from "./Question3/Question3";
 
 function Question() {
   const { id } = useParams();
@@ -17,6 +18,10 @@ function Question() {
     {
       component: Question2,
       title: "What language is spoken in your household?"
+    },
+    {
+      component: Question3,
+      title: "Please tell us which touchscreen game, app or story you use most often with your child and why"
     }
   ]
 
@@ -61,11 +66,13 @@ function Question() {
           paddingLeft: "60px",
           paddingRight: "60px",
           margin: "30px 0",
+          opacity: +id === 3 ? "0.5" : ''
         }}
         LinkComponent={Link}
         to={`/questions/${+id + 1}`}
         size="medium"
         variant="outlined"
+        disabled={+id === 3 ? true : false}
       >
         Continue
       </Button>
