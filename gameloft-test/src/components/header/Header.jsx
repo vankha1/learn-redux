@@ -13,8 +13,8 @@ function Header() {
                 <span className='slogan'>FAMILIES USING TECHNOLOGY SURVEY</span>
             </div>
             <div  className='change-my-mind-btn'>
-                <Link to="/change-mind" style={{ textDecoration: checkedPath ? "" : "none", color: "white" }}> I HAVE CHANGED MY MIND</Link>
-                {!checkedPath && <ArrowForwardIosIcon />}
+                <Link to="/change-mind" style={{ textDecoration: checkedPath ? "" : "none", color: "#666666" }}> I HAVE CHANGED MY MIND</Link>
+                {!checkedPath && <ArrowForwardIosIcon color="#666666" />}
             </div>
         </header>
     )

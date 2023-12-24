@@ -25,6 +25,8 @@ function Submit() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
 
+  const [isChecked, setIsChecked] = useState([]);
+
   const handleChangeUserName = (event) => {
     setValue(event.target.value);
     setUsername(event.target.value);
@@ -46,8 +48,22 @@ function Submit() {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
     console.log(username, email)
+  }
+
+  const handleChecked = (event) => {
+    if (event.target.checked){
+      setIsChecked(prevState => [...prevState, event.target.checked]);
+    }
+    else{
+      setIsChecked(prevState => {
+        const index = prevState.indexOf(true);
+        if (index !== -1) {
+          return [...prevState.slice(0, index), ...prevState.slice(index + 1)];
+        }
+        return prevState;
+      });
+    }
   }
 
   return (
@@ -147,7 +163,7 @@ function Submit() {
           </div>
 
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Checkbox size="large" style={{ color: "#002248", margin: "0" }} />
+            <Checkbox size="large" style={{ color: "#002248", margin: "0" }} onChange={handleChecked} />
             <ListItemText
               style={{ fontWeight: "500" }}
               primary="I agree to receive a summary of the survey findings."
@@ -155,7 +171,7 @@ function Submit() {
           </div>
 
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Checkbox size="large" style={{ color: "#002248" }} />
+            <Checkbox size="large" style={{ color: "#002248" }} onChange={handleChecked} />
             <ListItemText
               style={{ fontWeight: "500" }}
               primary="I agree to be contacted by Gameloft about future research."
@@ -204,6 +220,8 @@ function Submit() {
               size="medium"
               variant="outlined"
               type="submit"
+              LinkComponent={isChecked.length !== 2 ? Link : ""}
+              to={isChecked.length !== 2 ?  "/error" : ""}
             >
               Submit
             </Button>
