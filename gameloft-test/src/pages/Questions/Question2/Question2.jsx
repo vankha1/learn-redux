@@ -10,7 +10,9 @@ import {
   MenuItem,
   FormControl,
   Select,
-  OutlinedInput
+  OutlinedInput,
+  FormLabel,
+  Input,
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
@@ -29,6 +31,8 @@ const MenuProps = {
 function Question2() {
   const [selected, setSelected] = useState([]); // select
   const [selectValue, setSelectValue] = useState(""); // radio
+
+  const [isOpen, setIsOpen] = useState(false);
   const isAllSelected =
     options.length > 0 && selected.length === options.length;
 
@@ -47,6 +51,14 @@ function Question2() {
     setSelected([]);
   };
 
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div style={{ maxWidth: "95%", margin: "0 auto" }}>
       <RadioGroup
@@ -56,16 +68,24 @@ function Question2() {
         value={selectValue}
       >
         <FormControl
-          style={{ margin: "10px", width: "450px", marginBottom: "224px" }}
+          style={{
+            margin: "10px",
+            width: "450px",
+            marginBottom: isOpen ? "224px" : "20px",
+          }}
+          size="small"
         >
           <Select
-            labelId="mutiple-select-label"
             multiple
             value={selected}
             onChange={handleChange}
             renderValue={(selected) => selected.join(", ")}
             MenuProps={MenuProps}
             style={{ fontWeight: "bold" }}
+            onOpen={handleOpen}
+            onClose={handleClose}
+            notched
+            // InputLabelProps={{ shrink: false }}
             input={
               <OutlinedInput
                 sx={{
@@ -77,6 +97,18 @@ function Question2() {
               />
             }
           >
+            <Input
+              style={{
+                textAlign: "center",
+                border: "2px solid #002248",
+                borderRadius: "5px",
+                padding: "0 5px",
+                marginLeft: "20px",
+                width: "90%",
+              }}
+              color="secondary"
+              placeholder="Search..."
+            />
             <MenuItem value="all">
               <ListItemIcon>
                 <Checkbox
@@ -109,12 +141,14 @@ function Question2() {
               selectValue === "Prefer not to say"
                 ? "2px solid #002248"
                 : "2px solid #dad8d8",
-            margin: "10px 0",
+            margin: "10px auto",
             borderRadius: "5px",
+            width: "98%",
           }}
           value="Prefer not to say"
           control={
             <Radio
+              size="small"
               style={{ color: "#002248" }}
               checkedIcon={<CheckCircleIcon />}
             />

@@ -7,6 +7,8 @@ import Agreement from './pages/Agreement/Agreement'
 import Question from './pages/Questions/Question'
 import ChangeMind from './pages/ChangeMind/ChangeMind'
 import Submit from './pages/Submit/Submit'
+import Thankyou from './pages/Thankyou/Thankyou'
+import Error from './pages/Error/Error'
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
             <Route path='/questions/:id' element={<Question />} />
             <Route path='/change-mind' element={<ChangeMind />} />
             <Route path='/form-submit' element={<Submit />} />
+            <Route path='/thankyou' element={<Thankyou />} />
+            <Route path='/error' element={<Error />} />
           </Routes>
         </div>
       <Footer />

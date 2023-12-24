@@ -29,6 +29,7 @@ function Question() {
 
   return (
     <div style={{ textAlign: "center", maxWidth: "35%", margin: "20px auto" }}>
+      {/* Question header */}
       <div className="question-header">
         {id === "1" ? (
           ""
@@ -54,7 +55,8 @@ function Question() {
           </span>
         </div>
       </div>
-
+        
+      {/* Question Content */}
       <h2 >{components[+id - 1].title}</h2>
       <QuestionComponent />
 

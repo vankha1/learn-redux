@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from 'react-router-dom'
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -21,9 +22,17 @@ function Submit() {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
-  const handleChange = (event) => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleChangeUserName = (event) => {
     setValue(event.target.value);
+    setUsername(event.target.value);
   };
+
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value);
+  }
 
   const handleKeyPress = (event) => {
     const keyCode = event.keyCode || event.which;
@@ -35,6 +44,11 @@ function Submit() {
       setError(false);
     }
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(username, email)
+  }
 
   return (
     <div className="form-submit">
@@ -79,7 +93,7 @@ function Submit() {
         </p>
         <p>If you change your mind, you can always opt-out at a later date.</p>
 
-        <form style={{ marginTop: "40px" }}>
+        <form style={{ marginTop: "40px" }} onSubmit={handleSubmit}>
           <div style={{}}>
             <FormLabel
               style={{
@@ -95,7 +109,7 @@ function Submit() {
               error={error}
               helperText={error ? "Numbers are not allowed." : ""}
               value={value}
-              onChange={handleChange}
+              onChange={handleChangeUserName}
               onKeyPress={handleKeyPress}
               placeholder="Jennifer Lovewood"
               required
@@ -121,6 +135,7 @@ function Submit() {
               <EmailIcon /> EMAIL:
             </FormLabel>
             <TextField
+                onChange={handleChangeEmail}
               placeholder="Jennilove@mail.com |"
               required
               variant="outlined"
@@ -171,7 +186,8 @@ function Submit() {
               }}
               size="medium"
               variant="outlined"
-              type="submit"
+              LinkComponent={Link}
+              to={"/questions/3"}
             >
               <ArrowBackIosNewIcon fontSize="10px" />{" "}
               <span style={{ marginLeft: "5px" }}>Back to survey</span>
