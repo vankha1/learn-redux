@@ -1,4 +1,5 @@
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 function ChangeMind() {
   return (
@@ -65,6 +66,8 @@ function ChangeMind() {
           }}
           size="medium"
           variant="outlined"
+          LinkComponent={Link}
+          to={'/questions/1'}
         >
           Back to survey
         </Button>

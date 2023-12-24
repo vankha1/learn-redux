@@ -55,7 +55,7 @@ function Question() {
         </div>
       </div>
 
-      <h2 style={{  }}>{components[+id - 1].title}</h2>
+      <h2 >{components[+id - 1].title}</h2>
       <QuestionComponent />
 
       <Button
@@ -66,13 +66,11 @@ function Question() {
           paddingLeft: "60px",
           paddingRight: "60px",
           margin: "30px 0",
-          opacity: +id === 3 ? "0.5" : ''
         }}
         LinkComponent={Link}
-        to={`/questions/${+id + 1}`}
+        to={+id === 3 ? "/form-submit" :`/questions/${+id + 1}`}
         size="medium"
         variant="outlined"
-        disabled={+id === 3 ? true : false}
       >
         Continue
       </Button>
