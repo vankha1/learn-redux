@@ -51,8 +51,8 @@ function Agreement() {
         <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
           <Button
             style={{
-              paddingLeft: "65px",
-              paddingRight: "65px",
+              paddingLeft: "70px",
+              paddingRight: "70px",
               textTransform: "none",
               color: "#002248",
               borderColor: "#002248"
@@ -71,7 +71,7 @@ function Agreement() {
               paddingRight: "60px",
             }}
             LinkComponent={captchaVerified ? Link : "button"}
-            to={captchaVerified ? "/about" : ""}
+            to={captchaVerified ? "/questions/1" : ""}
             disabled={!captchaVerified}
             size="medium"
             variant="outlined"
