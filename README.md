@@ -1,8 +1,4 @@
-# Vo Van Kha
-
-## Self-assessment
-
-The test required the use of five libraries: React JS, Redux, Google Recaptcha, React Router, and React Material UI. To be honest, I am just familiar with ReactJS and React Router. I have some knowledge of the remaining three libraries, but I haven’t used them in my own projects. Despite this, I tried my best to complete the test as well as possible.
+# Survey form 
 
 ### What I've finished:
 
