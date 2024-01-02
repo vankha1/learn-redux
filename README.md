@@ -6,6 +6,7 @@
 - Implemented page navigation using React Router
 - Integrated Google Recaptcha
 - Handled logic and component division.
+- Implemented user information with Redux-toolkit
 
 ### What I will need to do or refactor:
 
