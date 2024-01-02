@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -15,26 +15,39 @@ import {
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
+import { useDispatch, useSelector } from "react-redux";
 
+import { profile } from "../../redux/userSlice";
 import "./submit.css";
 
 function Submit() {
+  const user = useSelector((e) => e.user.submitInfo);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [isChecked, setIsChecked] = useState([]);
+  const [isReceivedSummary, setIsReceivedSummary] = useState(false);
+  const [isContacted, setIsContacted] = useState(false);
 
   const handleChangeUserName = (event) => {
+    if (event.target.value === "") {
+      setError(false);
+    }
     setValue(event.target.value);
     setUsername(event.target.value);
+    dispatch(profile({ ...user, username: event.target.value }));
   };
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
-  }
+    dispatch(profile({ ...user, email: event.target.value }));
+  };
 
   const handleKeyPress = (event) => {
     const keyCode = event.keyCode || event.which;
@@ -48,23 +61,33 @@ function Submit() {
   };
 
   const handleSubmit = (event) => {
-    console.log(username, email)
-  }
+    event.preventDefault();
+    navigate("/thankyou");
+  };
 
-  const handleChecked = (event) => {
-    if (event.target.checked){
-      setIsChecked(prevState => [...prevState, event.target.checked]);
-    }
-    else{
-      setIsChecked(prevState => {
-        const index = prevState.indexOf(true);
-        if (index !== -1) {
-          return [...prevState.slice(0, index), ...prevState.slice(index + 1)];
-        }
-        return prevState;
-      });
-    }
-  }
+  const handleReceivedSummary = (e) => {
+    console.log(e.target.checked)
+    setIsReceivedSummary(e.target.checked);
+    dispatch(
+      profile({
+        ...user,
+        isReceivedSummary: e.target.checked,
+      })
+    );
+  };
+
+  const handleContacted = (e) => {
+    console.log(e.target.checked)
+    setIsContacted(e.target.checked);
+    dispatch(
+      profile({
+        ...user,
+        isContacted: e.target.checked,
+      })
+    );
+  };
+
+  console.log(user);
 
   return (
     <div className="form-submit">
@@ -151,7 +174,7 @@ function Submit() {
               <EmailIcon /> EMAIL:
             </FormLabel>
             <TextField
-                onChange={handleChangeEmail}
+              onChange={handleChangeEmail}
               placeholder="Jennilove@mail.com |"
               required
               variant="outlined"
@@ -163,7 +186,12 @@ function Submit() {
           </div>
 
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Checkbox size="large" style={{ color: "#002248", margin: "0" }} onChange={handleChecked} />
+            <Checkbox
+              size="large"
+              style={{ color: "#002248", margin: "0" }}
+              onChange={handleReceivedSummary}
+              value={isReceivedSummary}
+            />
             <ListItemText
               style={{ fontWeight: "500" }}
               primary="I agree to receive a summary of the survey findings."
@@ -171,7 +199,12 @@ function Submit() {
           </div>
 
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Checkbox size="large" style={{ color: "#002248" }} onChange={handleChecked} />
+            <Checkbox
+              size="large"
+              style={{ color: "#002248" }}
+              onChange={handleContacted}
+              value={isContacted}
+            />
             <ListItemText
               style={{ fontWeight: "500" }}
               primary="I agree to be contacted by Gameloft about future research."
@@ -189,7 +222,7 @@ function Submit() {
               alignItems: "center",
               gap: "20px",
               marginTop: "30px",
-              marginBottom: "50px"
+              marginBottom: "50px",
             }}
           >
             <Button
@@ -220,8 +253,8 @@ function Submit() {
               size="medium"
               variant="outlined"
               type="submit"
-              LinkComponent={isChecked.length !== 2 ? Link : ""}
-              to={isChecked.length !== 2 ?  "/error" : ""}
+              // LinkComponent={isChecked.length !== 2 ? Link : ""}
+              // to={isChecked.length !== 2 ? "/error" : ""}
             >
               Submit
             </Button>

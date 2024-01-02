@@ -84,7 +84,7 @@ function Question2() {
         >
           <Select
             multiple
-            value={selected}
+            value={user.language}
             onChange={handleChange}
             renderValue={(selected) => selected.join(", ")}
             MenuProps={MenuProps}
@@ -158,6 +158,7 @@ function Question2() {
               size="small"
               style={{ color: "#002248" }}
               checkedIcon={<CheckCircleIcon />}
+              checked={user.isPrefed}
             />
           }
           label="Prefer not to say"

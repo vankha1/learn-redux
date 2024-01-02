@@ -1,7 +1,19 @@
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { reset } from "../../redux/userSlice";
 
 function ChangeMind() {
+  const userInfor = useSelector((e) => e.user.value);
+  const userProfile = useSelector((e) => e.user.submitInfo);
+
+  const dispatch = useDispatch();
+
+  const handleChangeMind = () => {
+    dispatch(reset(userInfor, userProfile));
+  };
+
   return (
     <div
       style={{
@@ -50,6 +62,8 @@ function ChangeMind() {
           }}
           size="medium"
           variant="outlined"
+          onClick={handleChangeMind}
+          href="/"
         >
           I have changed my mind
         </Button>
@@ -67,7 +81,7 @@ function ChangeMind() {
           size="medium"
           variant="outlined"
           LinkComponent={Link}
-          to={'/questions/1'}
+          to={"/questions/1"}
         >
           Back to survey
         </Button>

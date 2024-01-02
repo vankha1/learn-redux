@@ -1,5 +1,6 @@
 import { Routes, Route, Link, useParams } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import './questionHeader.css'
 
 function QuestionHeader({ page, questionPerPart }) {
   const limitQuestionPerPart = 2;
