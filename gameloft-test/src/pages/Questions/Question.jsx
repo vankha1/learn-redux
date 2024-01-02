@@ -1,4 +1,4 @@
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+
 import Button from "@mui/material/Button";
 import { Routes, Route, Link, useParams } from "react-router-dom";
 
@@ -6,8 +6,7 @@ import "./question.css";
 import Question1 from "./Question1/Question1";
 import Question2 from "./Question2/Question2";
 import Question3 from "./Question3/Question3";
-
-const limitQuestionPerPart = 2;
+import QuestionHeader from "../../components/question-header/QuestionHeader";
 
 function Question() {
   const { id } = useParams();
@@ -33,41 +32,7 @@ function Question() {
   return (
     <>
       {/* Question header */}
-      <div className="question-header">
-        {id === "1" ? (
-          <div></div>
-        ) : (
-          <Link
-            to={`/questions/${+id - 1}`}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              cursor: "pointer",
-              textDecoration: "none",
-            }}
-          >
-            <ArrowBackIosNewIcon fontSize="10px" />
-            <span>Back</span>
-          </Link>
-        )}
-        <div
-          style={{
-            border: "1px solid #dad8d8",
-            padding: "10px",
-            borderRadius: "5px",
-          }}
-        >
-          <span>
-            <strong>[Part {Math.ceil(+id / limitQuestionPerPart)}]</strong>{" "}
-            <strong>{+id < 10 ? `0${+id}` : id}/</strong>
-            <span>
-              {components.length < 10
-                ? `0${+components.length}`
-                : components.length}
-            </span>{" "}
-          </span>
-        </div>
-      </div>
+      <QuestionHeader page={id} questionPerPart={components.length} />
 
       <div
         style={{ textAlign: "center", maxWidth: "35%", margin: "20px auto" }}

@@ -1,13 +1,23 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { info } from "../../../redux/userSlice";
 
 function Question3() {
+  const user = useSelector(e => e.user.value);
+  const dispatch = useDispatch();
+
   const [value, setValue] = useState("");
 
   const handleChange = (event) => {
     const shouldSetValue = value.length < 2000;
 
-    if (shouldSetValue) setValue(event.target.value);
+    if (shouldSetValue) {
+      setValue(event.target.value)
+      dispatch(info({ ...user, app: event.target.value }))
+    };
   };
+
+  console.log(user);
 
   return (
     <div>
@@ -20,7 +30,7 @@ function Question3() {
         }}
         rows="15"
         cols="50"
-        value={value}
+        value={user.app}
         onChange={handleChange}
       />
 

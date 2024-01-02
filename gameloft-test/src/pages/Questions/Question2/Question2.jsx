@@ -15,6 +15,8 @@ import {
   Input,
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { useDispatch, useSelector } from "react-redux";
+import { info } from "../../../redux/userSlice";
 
 const options = ["Chinese", "English", "Vietnamese"];
 const ITEM_HEIGHT = 48;
@@ -29,6 +31,9 @@ const MenuProps = {
 };
 
 function Question2() {
+  const user = useSelector(e => e.user.value)
+  const dispatch = useDispatch()
+
   const [selected, setSelected] = useState([]); // select
   const [selectValue, setSelectValue] = useState(""); // radio
 
@@ -44,11 +49,13 @@ function Question2() {
     }
     setSelected(value);
     setSelectValue("");
+    dispatch(info({ ...user, language: value, isPrefed: false }))
   };
 
   const handleOnChange = (event) => {
     setSelectValue(event.target.value);
     setSelected([]);
+    dispatch(info({ ...user, language: [], isPrefed: true }))
   };
 
   const handleOpen = () => {
@@ -58,7 +65,7 @@ function Question2() {
   const handleClose = () => {
     setIsOpen(false);
   };
-
+  console.log(user)
   return (
     <div style={{ maxWidth: "95%", margin: "0 auto" }}>
       <RadioGroup

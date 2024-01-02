@@ -15,16 +15,16 @@ function App() {
   return (
     <>
       <Header />
-        <div className='content'>  
-          <Routes>
-            <Route path='/' element={<Agreement />} />
-            <Route path='/questions/:id' element={<Question />} />
-            <Route path='/change-mind' element={<ChangeMind />} />
-            <Route path='/form-submit' element={<Submit />} />
-            <Route path='/thankyou' element={<Thankyou />} />
-            <Route path='/error' element={<Error />} />
-          </Routes>
-        </div>
+      <div className='content'>  
+        <Routes>
+          <Route path='/' element={<Agreement />} />
+          <Route path='/questions/:id' element={<Question />} />
+          <Route path='/change-mind' element={<ChangeMind />} />
+          <Route path='/form-submit' element={<Submit />} />
+          <Route path='/thankyou' element={<Thankyou />} />
+          <Route path='/error' element={<Error />} />
+        </Routes>
+      </div>
       <Footer />
     </>
   )
